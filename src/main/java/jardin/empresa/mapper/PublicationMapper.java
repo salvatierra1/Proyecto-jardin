@@ -36,6 +36,7 @@ public class PublicationMapper {
         publicationDTO.setBiography(saved.getBiography());
         publicationDTO.setRelevant(saved.isRelevant());
         publicationDTO.setDate_creation(saved.getDate_creation());
+        publicationDTO.setDate_update(saved.getDate_update());
         return publicationDTO;
     }
 
@@ -51,7 +52,6 @@ public class PublicationMapper {
         publication.setTitle(publication.getTitle());
         publication.setBiography(publicationDTO.getBiography());
         publication.setRelevant(publicationDTO.isRelevant());
-        publication.setDate_update(publicationDTO.getDate_update());
         return publication;
     }
 

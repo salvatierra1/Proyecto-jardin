@@ -40,6 +40,7 @@ public class EmployeeMapper {
         employeeDTO.setBiography(saved.getBiography());
         employeeDTO.setImageUrl(saved.getImageUrl());
         employeeDTO.setDate_creation(saved.getDate_creation());
+        employeeDTO.setDate_update(saved.getDate_update());
         return employeeDTO;
     }
     public Employee updateEntity(Long id, EmployeeDTO employeeDTO, MultipartFile multipartFile) throws IOException {
@@ -57,7 +58,6 @@ public class EmployeeMapper {
         employee.setBiography(employeeDTO.getBiography());
         employee.setImageId(employee.getImageId());
         employee.setImageUrl(employee.getImageUrl());
-        employee.setDate_update(employeeDTO.getDate_update());
         return employee;
     }
     public List<EmployeeDTO> listEntityDto(List<Employee> listEmployees) {

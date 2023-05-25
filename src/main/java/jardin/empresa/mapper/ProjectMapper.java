@@ -44,6 +44,7 @@ public class ProjectMapper {
         projectDTO.setBiography(saved.getBiography());
         projectDTO.setImageUrl(saved.getImageUrl());
         projectDTO.setDate_creation(saved.getDate_creation());
+        projectDTO.setDate_update(saved.getDate_update());
         return projectDTO;
     }
 
@@ -58,7 +59,6 @@ public class ProjectMapper {
             project.setName(projectDTO.getName());
             project.setBiography(projectDTO.getBiography());
             project.setImageUrl(project.getImageUrl());
-            project.setDate_update(projectDTO.getDate_update());
             return project;
     }
     public List<ProjectDTO> listEntityDto(List<Project> projects) {
