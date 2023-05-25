@@ -54,6 +54,7 @@ public class CompanyMapper {
         dto.setLinkLk(saved.getLinkLk());
         dto.setMission(saved.getMission());
         dto.setVision(saved.getVision());
+        dto.setDate_creation(saved.getDate_creation());
         return dto;
     }
 
@@ -80,6 +81,7 @@ public class CompanyMapper {
         company.setLinkLk(companyDTO.getLinkLk());
         company.setMission(companyDTO.getMission());
         company.setVision(companyDTO.getVision());
+        company.setDate_creation(companyDTO.getDate_creation());
         return company;
     }
     public List<CompanyDTO> listEntityDto(List<Company> listCompany) {

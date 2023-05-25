@@ -3,6 +3,8 @@ package jardin.empresa.DTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CompanyDTO {
@@ -36,4 +38,6 @@ public class CompanyDTO {
     private String mission;
 
     private String vision;
+
+    private LocalDate date_creation;
 }

@@ -34,6 +34,7 @@ public class GalleryMapper {
         galleryDTO.setImageUrl(gallery.getImageUrl());
         galleryDTO.setDescription(gallery.getDescription());
         galleryDTO.setAlternative(gallery.getAlternative());
+        galleryDTO.setDate_creation(gallery.getDate_creation());
         return galleryDTO;
     }
 
