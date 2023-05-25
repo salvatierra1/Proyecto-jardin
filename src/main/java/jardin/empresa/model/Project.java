@@ -27,6 +27,7 @@ public class Project {
 
     private String name;
 
+    @Column(name="biography", length=1000)
     private String biography;
 
     @CreationTimestamp

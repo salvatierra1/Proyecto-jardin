@@ -28,6 +28,7 @@ public class Publication {
 
     private String title;
 
+    @Column(name="biography", length=1000)
     private String biography;
 
     private boolean relevant;

@@ -16,6 +16,7 @@ public class PublicationDTO {
 
     private String imageUrl;
 
+
     private String biography;
 
     private boolean relevant;
