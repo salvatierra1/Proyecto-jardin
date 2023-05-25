@@ -57,7 +57,7 @@ public class EmployeeMapper {
         employee.setBiography(employeeDTO.getBiography());
         employee.setImageId(employee.getImageId());
         employee.setImageUrl(employee.getImageUrl());
-        employee.setDate_creation(employeeDTO.getDate_creation());
+        employee.setDate_update(employeeDTO.getDate_update());
         return employee;
     }
     public List<EmployeeDTO> listEntityDto(List<Employee> listEmployees) {

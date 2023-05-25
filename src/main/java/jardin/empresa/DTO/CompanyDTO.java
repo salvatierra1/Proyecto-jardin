@@ -40,4 +40,7 @@ public class CompanyDTO {
     private String vision;
 
     private LocalDate date_creation;
+
+    private LocalDate date_update;
+
 }

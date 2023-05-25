@@ -21,4 +21,6 @@ public class ProjectDTO {
 
     private LocalDate date_creation;
 
+    private LocalDate date_update;
+
 }

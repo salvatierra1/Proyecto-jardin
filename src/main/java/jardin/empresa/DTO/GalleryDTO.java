@@ -25,4 +25,6 @@ public class GalleryDTO {
 
     private LocalDate date_creation;
 
+    private LocalDate date_update;
+
 }

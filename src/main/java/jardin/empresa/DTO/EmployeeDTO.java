@@ -24,4 +24,6 @@ public class EmployeeDTO {
     private String imageUrl;
 
     private LocalDate date_creation;
+
+    private LocalDate date_update;
 }
