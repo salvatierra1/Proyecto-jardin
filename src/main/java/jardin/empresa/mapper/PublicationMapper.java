@@ -49,7 +49,7 @@ public class PublicationMapper {
             publication.setImageUrl((String) result.get(("url")));
         }
         publication.setImageUrl(publication.getImageUrl());
-        publication.setTitle(publication.getTitle());
+        publication.setTitle(publicationDTO.getTitle());
         publication.setBiography(publicationDTO.getBiography());
         publication.setRelevant(publicationDTO.isRelevant());
         return publication;
