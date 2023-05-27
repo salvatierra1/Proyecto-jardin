@@ -72,7 +72,7 @@ public class UserDetailsCustomService implements UserDetailsService {
     }
 
     public void editPass(UserEntity userEntity) {
-        UserEntity encontrado = userRepository.findByEmail(userEntity.getName());
+        UserEntity encontrado = userRepository.findByUsername(userEntity.getUsername());
         if(encontrado!=null) {
             encontrado.setPassword(passwordEncoder.encode(userEntity.getPassword()));
             UserEntity saved = userRepository.save(encontrado);
