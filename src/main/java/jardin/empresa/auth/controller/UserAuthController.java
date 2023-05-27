@@ -62,15 +62,20 @@ public class UserAuthController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void>put(@PathVariable Long id, @RequestBody UserEntity userEntity){
+    public ResponseEntity<Void> put(@PathVariable Long id, @RequestBody UserEntity userEntity) {
         userDetailsService.put(id, userEntity);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PutMapping("recuperar/{name}")
-    public ResponseEntity<Void>actualizarContraseña(@PathVariable String name, @RequestBody UserEntity userEntity){
+    public ResponseEntity<Void> actualizarContraseña(@PathVariable String name, @RequestBody UserEntity userEntity) {
         userDetailsService.edit(name, userEntity);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @PutMapping("pass")
+    public ResponseEntity<Void>recuperarPass(@RequestBody UserEntity userEntity){
+        userDetailsService.editPass(userEntity);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }
