@@ -43,19 +43,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception{
         return super.authenticationManagerBean();
     }
-    
-    /*@Override
+
+    @Override
     public void configure(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.cors();
         httpSecurity.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/auth/signup", "/auth/signin", "/auth/recuperar/{name}").permitAll()
                 .antMatchers(HttpMethod.GET, "/empleado/{id}").permitAll()
+                .antMatchers(HttpMethod.GET, "/empleado/all").permitAll()
                 .antMatchers(HttpMethod.GET, "/empresa/{id}").permitAll()
+                .antMatchers(HttpMethod.GET, "/empresa/all").permitAll()
                 .antMatchers(HttpMethod.GET, "/proyecto/{id}").permitAll()
+                .antMatchers(HttpMethod.GET, "/proyecto/all").permitAll()
                 .antMatchers(HttpMethod.GET, "/publicacion/{id}").permitAll()
-                .antMatchers(HttpMethod.GET, "/galeria/{id}").permitAll()
-                .antMatchers(HttpMethod.GET, "/galeria").permitAll()
+                .antMatchers(HttpMethod.GET, "/publicacion/all").permitAll()
+                .antMatchers(HttpMethod.GET, "/publicacion/relevant").permitAll()
+                .antMatchers(HttpMethod.GET, "/galeria/page").permitAll()
                 .antMatchers(HttpMethod.POST, "/empleado").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/empleado/{id}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/emepleado/{id}").hasRole("ADMIN")
@@ -76,9 +80,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(STATELESS);
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
-    }*/
-
-    @Override
+    }
+    /*@Override
     protected void configure(HttpSecurity http) throws  Exception {
         http.cors();
         http.csrf().disable();
@@ -87,6 +90,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .authorizeRequests().antMatchers("/authenticate").permitAll().
 //                anyRequest().authenticated()
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-    }
+    }*/
 
 }
