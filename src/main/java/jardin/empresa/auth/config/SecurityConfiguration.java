@@ -49,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity.cors();
         httpSecurity.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/auth/signup", "/auth/signin", "/auth/recuperar/{name}", "/auth/pass").permitAll()
+                .antMatchers("/auth/signup", "/auth/signin", "/auth/pass").permitAll()
                 .antMatchers(HttpMethod.GET, "/employee/{id}").permitAll()
                 .antMatchers(HttpMethod.GET, "/employee/all").permitAll()
                 .antMatchers(HttpMethod.GET, "/company/{id}").permitAll()

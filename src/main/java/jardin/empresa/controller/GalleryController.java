@@ -19,7 +19,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/gallery")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class GalleryController {
     @Autowired
     private GalleryService galleryService;

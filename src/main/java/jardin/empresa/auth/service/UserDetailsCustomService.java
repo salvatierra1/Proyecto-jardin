@@ -1,12 +1,16 @@
 package jardin.empresa.auth.service;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jardin.empresa.auth.dto.AuthenticationRequest;
 import jardin.empresa.auth.dto.UserDTO;
 import jardin.empresa.auth.entity.UserEntity;
 import jardin.empresa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -15,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.swing.text.html.parser.Entity;
 import javax.transaction.Transactional;
@@ -65,17 +70,16 @@ public class UserDetailsCustomService implements UserDetailsService {
         UserEntity saved = userRepository.save(entity);
     }
 
-    public void edit(String name, UserEntity userEntity) {
-        UserEntity entity = userRepository.findByName(name);
-        entity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-        UserEntity saved = userRepository.save(entity);
-    }
+    public ResponseEntity<String> editPass(UserEntity userEntity) {
+        Optional<UserEntity> optionalUser = Optional.ofNullable(userRepository.findByUsername(userEntity.getUsername()));
 
-    public void editPass(UserEntity userEntity) {
-        UserEntity encontrado = userRepository.findByUsername(userEntity.getUsername());
-        if(encontrado!=null) {
+        if (optionalUser.isPresent()) {
+            UserEntity encontrado = optionalUser.get();
             encontrado.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-            UserEntity saved = userRepository.save(encontrado);
+            userRepository.save(encontrado);
+            return ResponseEntity.ok("Password updated successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 }

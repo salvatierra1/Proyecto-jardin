@@ -22,7 +22,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "https://portfolio-8d6ba.web.app")
+@CrossOrigin(origins = "*")
 public class UserAuthController {
 
     private UserDetailsCustomService userDetailsService;
@@ -67,15 +67,10 @@ public class UserAuthController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @PutMapping("recuperar/{name}")
-    public ResponseEntity<Void> actualizarContraseña(@PathVariable String name, @RequestBody UserEntity userEntity) {
-        userDetailsService.edit(name, userEntity);
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
-
     @PutMapping("pass")
-    public ResponseEntity<Void>recuperarPass(@RequestBody UserEntity userEntity){
-        userDetailsService.editPass(userEntity);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseEntity<String> recuperarPass(@RequestBody UserEntity userEntity) {
+        boolean isPasswordUpdated = userDetailsService.editPass(userEntity).hasBody();
+        HttpStatus status = isPasswordUpdated ? HttpStatus.OK : HttpStatus.NOT_FOUND;
+        return ResponseEntity.status(status).build();
     }
 }
