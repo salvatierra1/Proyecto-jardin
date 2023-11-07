@@ -14,6 +14,8 @@ public class CompanyDTO {
 
     private String imageId;
 
+    private String imageCompanyId;
+
     private String name;
 
     private String location;
@@ -23,6 +25,8 @@ public class CompanyDTO {
     private String biography;
 
     private String imageUrl;
+
+    private String imageCompanyUrl;
 
     private String schedules;
 

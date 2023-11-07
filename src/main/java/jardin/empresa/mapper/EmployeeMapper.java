@@ -28,7 +28,8 @@ public class EmployeeMapper {
         employee.setTitle(employeeDTO.getTitle());
         employee.setBiography(employeeDTO.getBiography());
         employee.setImageId((String)result.get("public_id"));
-        employee.setImageUrl((String)result.get("url"));
+        System.out.println("ESTA ES MI URL" + result.get("public_id"));
+        employee.setImageUrl((String)result.get("secure_url"));
         return employee;
     }
     public EmployeeDTO entityToDto(Employee saved) {
@@ -49,7 +50,7 @@ public class EmployeeMapper {
             Map result = cloudinaryService.upload(multipartFile);
             Map delete = cloudinaryService.delete(employee.getImageId());
             employee.setImageId((String) result.get(("public_id")));
-            employee.setImageUrl((String) result.get(("url")));
+            employee.setImageUrl((String) result.get(("secure_url")));
         }
         employee.setName(employeeDTO.getName());
         employee.setName(employeeDTO.getName());
