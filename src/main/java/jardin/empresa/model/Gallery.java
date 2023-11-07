@@ -26,7 +26,7 @@ public class Gallery {
 
     private String imageUrl;
 
-    @Column(name="description", length=1000)
+    @Column(name="description", length=2000)
     private String description;
 
     private String alternative;
