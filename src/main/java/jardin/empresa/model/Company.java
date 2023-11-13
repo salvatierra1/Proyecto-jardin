@@ -24,16 +24,20 @@ public class Company {
 
     private String imageId;
 
+    private String imageCompanyId;
+
     private String name;
 
     private String location;
 
     private String resolution;
 
-    @Column(name="biography", length=1000)
+    @Column(name="biography", length=2000)
     private String biography;
 
     private String imageUrl;
+
+    private String imageCompanyUrl;
 
     private String schedules;
 
@@ -47,8 +51,10 @@ public class Company {
 
     private String linkLk;
 
+    @Column(name="mission", length=2000)
     private String mission;
 
+    @Column(length=2000)
     private String vision;
 
     @CreationTimestamp

@@ -19,8 +19,9 @@ public class CompanyMapper {
     private CompanyRepository companyRepository;
     @Autowired
     private CloudinaryServiceImpl cloudinaryService;
-    public Company dtoToEntity(CompanyDTO companyDTO, MultipartFile multipartFile) throws IOException {
+    public Company dtoToEntity(CompanyDTO companyDTO, MultipartFile multipartFile, MultipartFile multipartFileCompany) throws IOException {
         Map result = cloudinaryService.upload(multipartFile);
+        Map imageCompany = cloudinaryService.upload(multipartFileCompany);
         Company company = new Company();
         company.setName(companyDTO.getName());
         company.setBiography(companyDTO.getBiography());
@@ -31,6 +32,8 @@ public class CompanyMapper {
         company.setEmail(companyDTO.getEmail());
         company.setImageId((String)result.get("public_id"));
         company.setImageUrl((String)result.get("url"));
+        company.setImageCompanyId((String)result.get("public_id"));
+        company.setImageCompanyUrl((String)imageCompany.get("url"));
         company.setLinkIg(companyDTO.getLinkIg());
         company.setLinkFb(companyDTO.getLinkFb());
         company.setLinkLk(companyDTO.getLinkLk());
@@ -49,6 +52,7 @@ public class CompanyMapper {
         dto.setPhone(saved.getPhone());
         dto.setEmail(saved.getEmail());
         dto.setImageUrl(saved.getImageUrl());
+        dto.setImageCompanyUrl(saved.getImageCompanyUrl());
         dto.setLinkIg(saved.getLinkIg());
         dto.setLinkFb(saved.getLinkFb());
         dto.setLinkLk(saved.getLinkLk());
@@ -59,15 +63,24 @@ public class CompanyMapper {
         return dto;
     }
 
-    public Company updateEntity(Long id, CompanyDTO companyDTO, MultipartFile multipartFile) throws IOException {
-        Company company = companyRepository.findById(id).orElseThrow(()->
+    public Company updateEntity(Long id, CompanyDTO companyDTO, MultipartFile multipartFile, MultipartFile multipartFileCompany) throws IOException {
+        Company company = companyRepository.findById(id).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND));
+
         if (multipartFile != null) {
             Map result = cloudinaryService.upload(multipartFile);
             Map delete = cloudinaryService.delete(company.getImageId());
-            company.setImageId((String) result.get(("public_id")));
-            company.setImageUrl((String) result.get(("url")));
+            company.setImageId((String) result.get("public_id"));
+            company.setImageUrl((String) result.get("url"));
         }
+
+        if (multipartFileCompany != null) {
+            Map imageCompany = cloudinaryService.upload(multipartFileCompany);
+            Map deleteImageCompany = cloudinaryService.delete(company.getImageCompanyId());
+            company.setImageCompanyId((String) imageCompany.get("public_id"));
+            company.setImageCompanyUrl((String) imageCompany.get("url"));
+        }
+
         company.setName(companyDTO.getName());
         company.setBiography(companyDTO.getBiography());
         company.setResolution(companyDTO.getResolution());
@@ -75,15 +88,15 @@ public class CompanyMapper {
         company.setSchedules(companyDTO.getSchedules());
         company.setPhone(companyDTO.getPhone());
         company.setEmail(companyDTO.getEmail());
-        company.setImageId(company.getImageId());
-        company.setImageUrl(company.getImageUrl());
         company.setLinkIg(companyDTO.getLinkIg());
         company.setLinkFb(companyDTO.getLinkFb());
         company.setLinkLk(companyDTO.getLinkLk());
         company.setMission(companyDTO.getMission());
         company.setVision(companyDTO.getVision());
-        return company;
+
+        return companyRepository.save(company);
     }
+
     public List<CompanyDTO> listEntityDto(List<Company> listCompany) {
         return  listCompany.stream().map(this::entityToDto).collect(Collectors.toList());
 

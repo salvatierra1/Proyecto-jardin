@@ -29,12 +29,12 @@ public class CompanyServiceImpl implements CompanyService {
     private CloudinaryServiceImpl cloudinaryService;
 
     @Override
-    public CompanyDTO save(CompanyDTO companyDTO, MultipartFile multipartFile) throws IOException {
+    public CompanyDTO save(CompanyDTO companyDTO, MultipartFile multipartFile, MultipartFile multipartFileCompany ) throws IOException {
             BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
             if (bi == null){
                 throw new GenericException("Image no acceptable", HttpStatus.NOT_ACCEPTABLE);
             }
-            Company company = companyMapper.dtoToEntity(companyDTO, multipartFile);
+            Company company = companyMapper.dtoToEntity(companyDTO, multipartFile, multipartFileCompany);
             Company saved = companyRepository.save(company);
         return companyMapper.entityToDto(saved);
     }
@@ -49,11 +49,13 @@ public class CompanyServiceImpl implements CompanyService {
         Company company = companyRepository.findById(id).orElseThrow(()->
                 new ResponseStatusException(HttpStatus.NOT_FOUND));
         Map result = cloudinaryService.delete(company.getImageId());
+        Map imageCompany = cloudinaryService.delete(company.getImageCompanyId());
         companyRepository.delete(company);
     }
+
     @Override
-    public CompanyDTO put(Long id, CompanyDTO companyDTO, MultipartFile multipartFile) throws IOException {
-        Company company = companyMapper.updateEntity(id, companyDTO, multipartFile);
+    public CompanyDTO put(Long id, CompanyDTO companyDTO, MultipartFile multipartFile, MultipartFile multipartFileCompany ) throws IOException {
+        Company company = companyMapper.updateEntity(id, companyDTO, multipartFile, multipartFileCompany);
         Company saved = companyRepository.save(company);
         return companyMapper.entityToDto(saved);
     }

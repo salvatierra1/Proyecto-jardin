@@ -24,8 +24,9 @@ public class CompanyController {
     )
     public ResponseEntity<CompanyDTO>create(
             @Valid @RequestPart(value = "data_company") CompanyDTO companyDTO,
-            @RequestPart(value = "image") MultipartFile multipartFile) throws IOException {
-        return ResponseEntity.status(HttpStatus.CREATED).body(companyService.save(companyDTO, multipartFile));
+            @RequestPart(value = "image") MultipartFile multipartFile,
+            @RequestPart(value = "imageCompany") MultipartFile multipartFileCompany) throws IOException {
+        return ResponseEntity.status(HttpStatus.CREATED).body(companyService.save(companyDTO, multipartFile, multipartFileCompany));
     }
     @GetMapping("/{id}")
     public ResponseEntity<CompanyDTO>get(@Valid @PathVariable String id){
@@ -41,8 +42,9 @@ public class CompanyController {
     public ResponseEntity<CompanyDTO>update(
             @Valid @PathVariable String id,
             @Valid @RequestPart(value = "data_company") CompanyDTO companyDTO,
-            @RequestPart(value = "image", required = false) MultipartFile multipartFile) throws IOException {
-        return ResponseEntity.status(HttpStatus.OK).body(companyService.put(Long.valueOf(id), companyDTO, multipartFile));
+            @RequestPart(value = "image", required = false) MultipartFile multipartFile,
+            @RequestPart(value = "imageCompany", required = false) MultipartFile multipartFileCompany) throws IOException {
+        return ResponseEntity.status(HttpStatus.OK).body(companyService.put(Long.valueOf(id), companyDTO, multipartFile, multipartFileCompany));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<CompanyDTO>delete(@Valid @PathVariable String id) throws IOException {

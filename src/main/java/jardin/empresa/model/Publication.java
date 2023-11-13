@@ -28,7 +28,7 @@ public class Publication {
 
     private String title;
 
-    @Column(name="biography", length=1000)
+    @Column(name="biography", length=2000)
     private String biography;
 
     private boolean relevant;
