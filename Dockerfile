@@ -1,4 +1,5 @@
-FROM ibm-semeru-runtimes:open-17-jdk-focal
+FROM amazoncorretto:17-alpine-jdk
+MAINTAINER Proyecto-jardin
+COPY target/empresa-0.0.1-SNAPSHOT.jar empresa-app.jar
 EXPOSE 8080
-ADD ./target/*.jar ./app.jar
-CMD java -Djava.security.egd=file:/dev/./urandom -jar app.jar
+ENTRYPOINT ["java", "-jar", "/empresa-app.jar"]
